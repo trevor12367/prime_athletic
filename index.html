@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Athletic | Ropa y Equipamiento de Gimnasio</title>
+  <style>
+    :root {
+      --bg: #0d0f12;
+      --surface: #161a20;
+      --surface-light: #1f242d;
+      --accent: #e63946;
+      --accent-hover: #ff4d5a;
+      --text: #f1f3f5;
+      --muted: #9aa3af;
+      --border: #2a303c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Navegación */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    /* Portada Hero */
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right, rgba(13, 15, 18, 0.92) 35%, rgba(13, 15, 18, 0.45)),
+                  url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      padding: 4rem 1.5rem;
+    }
+
+    .hero-content {
+      max-width: 1150px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      max-width: 650px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      color: #d1d5db;
+      max-width: 540px;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 1.75rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Secciones generales */
+    section {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-header p {
+      color: var(--muted);
+    }
+
+    /* Grid de productos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin: 0.35rem 0 0.5rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 0.9rem;
+    }
+
+    .price {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .btn-small {
+      background: var(--surface-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      border-radius: 5px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-small:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Sobre nosotros */
+    .about-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .about-box img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .value-item {
+      background: var(--surface-light);
+      padding: 0.9rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .value-item strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .value-item span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Contacto */
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 650px;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .values {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Prime <span>Athletic</span></a>
+      <nav>
+        <ul>
+          <li><a href="#ropa">Ropa</a></li>
+          <li><a href="#accesorios">Accesorios</a></li>
+          <li><a href="#marca">La Marca</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Portada principal -->
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Nueva Colección 2026</span>
+      <h1>Supera tus límites en cada serie</h1>
+      <p>Ropa técnica de alto rendimiento y equipamiento de gimnasio diseñados para entrenamientos intensos.</p>
+      <a href="#ropa" class="btn">Ver Catálogo</a>
+    </div>
+  </div>
+
+  <!-- Sección Ropa de Gimnasio -->
+  <section id="ropa">
+    <div class="section-header">
+      <h2>Ropa de Entrenamiento</h2>
+      <p>Tejidos transpirables, corte atlético y máxima resistencia.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80" alt="Camiseta técnica Prime Performance">
+        <div class="card-body">
+          <div>
+            <span class="category">Camisetas</span>
+            <h3>Camiseta Prime Pro Dry</h3>
+            <p>Tejido ultraligero de secado rápido con ajuste ergonómico en hombros y pecho.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">24,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Camiseta Prime Pro Dry')">Añadir</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80" alt="Sudadera Heavyweight Prime">
+        <div class="card-body">
+          <div>
+            <span class="category">Sudaderas</span>
+            <h3>Sudadera Heavy Pump</h3>
+            <p>Algodón grueso de 420 gsm ideal para calentamiento y entrenamientos de fuerza.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">44,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Sudadera Heavy Pump')">Añadir</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80" alt="Pantalón corto entrenamiento">
+        <div class="card-body">
+          <div>
+            <span class="category">Pantalones</span>
+            <h3>Shorts Flex 2-en-1</h3>
+            <p>Pantalón corto con malla interior de compresión y bolsillos con cremallera.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">29,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Shorts Flex 2-en-1')">Añadir</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Sección Productos y Accesorios de Gimnasio -->
+  <section id="accesorios">
+    <div class="section-header">
+      <h2>Equipamiento y Accesorios</h2>
+      <p>Todo lo que necesitas en tu mochila para rendir al máximo.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80" alt="Cinturón y straps de levantamiento">
+        <div class="card-body">
+          <div>
+            <span class="category">Fuerza</span>
+            <h3>Straps de Agarre Reforzados</h3>
+            <p>Correas de algodón de alta densidad con acolchado de neopreno para peso muerto y remos.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">14,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Straps de Agarre Reforzados')">Añadir</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=800&q=80" alt="Mancuernas y material de entrenamiento">
+        <div class="card-body">
+          <div>
+            <span class="category">Equipamiento</span>
+            <h3>Set Bandas de Resistencia</h3>
+            <p>Pack de 4 bandas elásticas de distinta tensión para movilidad, activación y dominadas.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">19,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Set Bandas de Resistencia')">Añadir</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Botella mezcladora Shaker Prime">
+        <div class="card-body">
+          <div>
+            <span class="category">Hidratación</span>
+            <h3>Shaker Prime Steel 750ml</h3>
+            <p>Mezclador térmico de acero inoxidable antifugas con rejilla interior sin grumos.</p>
+          </div>
+          <div class="card-footer">
+            <span class="price">16,99 €</span>
+            <button class="btn-small" onclick="alert('Producto añadido: Shaker Prime Steel 750ml')">Añadir</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Sección Sobre la Marca -->
+  <section id="marca">
+    <div class="about-box">
+      <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=900&q=80" alt="Interior gimnasio Prime Athletic">
+      <div>
+        <span class="category">Nuestra Filosofía</span>
+        <h2 style="margin: 0.4rem 0 1rem; text-transform: uppercase;">Sobre Prime Athletic</h2>
+        <p style="color: var(--muted); margin-bottom: 1rem;">
+          Prime Athletic nace con un objetivo claro: crear ropa deportiva y accesorios funcionales que aguanten el ritmo real del gimnasio, sin adornos innecesarios y a un precio justo.
+        </p>
+        <p style="color: var(--muted);">
+          Cada prenda y accesorio está pensado para ofrecer comodidad, durabilidad y seguridad en cada levantamiento.
+        </p>
+
+        <div class="values">
+          <div class="value-item">
+            <strong>100%</strong>
+            <span>Rendimiento</span>
+          </div>
+          <div class="value-item">
+            <strong>24/48h</strong>
+            <span>Envío rápido</span>
+          </div>
+          <div class="value-item">
+            <strong>+5.000</strong>
+            <span>Atletas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Contacto -->
+  <section id="contacto">
+    <div class="section-header">
+      <h2>Contacto</h2>
+      <p>¿Tienes dudas sobre tallas o pedidos? Escríbenos.</p>
+    </div>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('¡Mensaje enviado! El equipo de Prime Athletic te responderá pronto.'); this.reset();">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Tu nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" rows="4" placeholder="Consulta sobre productos, tallas..." required></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar Mensaje</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Prime Athletic. Proyecto web de marca deportiva.</p>
+  </footer>
+
+</body>
+</html>
